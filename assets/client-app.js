@@ -40,7 +40,7 @@ const app = new Vue({
 
     methods: {
 
-        startGame: async function() {
+        startGame: async function () {
             const response = await fetch("/game/start", {
                 method: "POST",
                 headers: {
@@ -51,7 +51,7 @@ const app = new Vue({
                 })
             });
             const newGameData = await response.json();
-            const {id, totalAttempts, wordLength} = newGameData;
+            const { id, totalAttempts, wordLength } = newGameData;
             this.gameState = {
                 id,
                 totalAttempts,
@@ -79,7 +79,7 @@ const app = new Vue({
             console.log(this.gameState)
         },
 
-        handleNewLetter: async function(key) {
+        handleNewLetter: async function (key) {
             if (key === "ENTER" && this.gameState.finished) {
                 this.startGame();
             }
@@ -97,13 +97,13 @@ const app = new Vue({
             }
         },
 
-        addLetter: function(letter) {
+        addLetter: function (letter) {
             letter = (letter || "").toUpperCase();
             if (!this.allowedLetters.has(letter)) {
                 return;
             }
 
-            const {board, currentAttempt} = this.gameState;
+            const { board, currentAttempt } = this.gameState;
             const row = board[currentAttempt];
             for (const tile of row) {
                 if (tile.letter === undefined) {
@@ -113,8 +113,8 @@ const app = new Vue({
             }
         },
 
-        deleteLetter: function() {
-            const {board, currentAttempt} = this.gameState;
+        deleteLetter: function () {
+            const { board, currentAttempt } = this.gameState;
             const row = board[currentAttempt];
             let lastTile;
             for (const tile of row) {
@@ -129,8 +129,8 @@ const app = new Vue({
             }
         },
 
-        submitWord: async function() {
-            const {id, board, currentAttempt} = this.gameState;
+        submitWord: async function () {
+            const { id, board, currentAttempt } = this.gameState;
             const row = board[currentAttempt];
             let guess = "";
             for (const tile of row) {
@@ -163,7 +163,7 @@ const app = new Vue({
                 return;
             }
 
-            const {result} = data;
+            const { result } = data;
 
             if (result) {
                 for (let i = 0; i < row.length; i++) {
@@ -207,7 +207,7 @@ const app = new Vue({
             }
         },
 
-        classForKey: function(key) {
+        classForKey: function (key) {
             return {
                 btn: true,
                 key: true,
@@ -216,7 +216,7 @@ const app = new Vue({
             };
         },
 
-        toggleDarkMode: function() {
+        toggleDarkMode: function () {
             this.darkMode = !this.darkMode;
             const body = document.querySelector("body");
             if (this.darkMode) {
@@ -229,7 +229,7 @@ const app = new Vue({
 
     },
 
-    mounted: function() {
+    mounted: function () {
         this.startGame();
 
         document.addEventListener("keyup", async (e) => {

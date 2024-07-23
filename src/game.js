@@ -39,7 +39,7 @@ const computeResult = (guess, correct) => {
 
 class Game {
 
-    constructor(dictionary, options={}) {
+    constructor(dictionary, options = {}) {
         this.totalAttempts = options.totalAttempts || 5
         this.dictionary = dictionary
         if (options.word) {
